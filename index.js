@@ -19,11 +19,13 @@ const client = new MongoClient(uri);
 
 const run = async () => {
   try {
-    const ordersCollection = client
-      .db("redTomato")
-      .collection("orders");
-    const query = {};
+    const ordersCollection = client.db("redTomato").collection("orders");
+    const contactsCollection = client.db("redTomato").collection("contacts");
+    const bookingsCollection = client.db("redTomato").collection("bookings");
 
+    // const query = {};
+
+    // orders api
 
     app.get("/orders", async (req,res)=>{
       const query = {} ;
@@ -45,6 +47,41 @@ const run = async () => {
       const result = await ordersCollection .deleteOne(query);
       res.send(result);
     });
+    
+    // Contact Api
+
+    app.get("/contacts", async(req,res)=>{
+      const query = {};
+      const cursor = contactsCollection.find(query);
+      const result = await cursor.toArray();
+      res.send(result);
+    })
+
+    app.post("/contacts" , async(req,res)=>{
+      const payload = req.body;
+      console.log(payload);
+      const result = await contactsCollection.insertOne(payload);
+      res.send(result);
+    })
+
+    //Booking Api
+
+    app.get("/bookings",async(req,res)=>{
+      const query = {};
+      const cursor = bookingsCollection.find(query);
+      const result = await cursor.toArray();
+      res.send(result)
+
+    })
+
+    app.post("/bookings" , async(req,res)=>{
+      const payload = req.body;
+      console.log(payload);
+      const result = await bookingsCollection.insertOne(payload);
+      res.send(result);
+    })
+
+
   } finally {
   }
 };
