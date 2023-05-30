@@ -2,13 +2,13 @@
   "name": "sunamspersonaltestserver",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "engines": {
     "node": "14.x"
   },
   "scripts": {
     "start": "node app.js",
-    "start-dev": "nodemon app.js",
+    "start-dev": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -19,6 +19,7 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "mongodb": "^5.1.0",
+    "mongoose": "^7.2.1",
     "nodemon": "^2.0.22"
   }
 }

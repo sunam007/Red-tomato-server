@@ -1,0 +1,41 @@
+// //MONGO Config
+// const uri = `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@ac-m6h1wqx-shard-00-00.rdmew3v.mongodb.net:27017,ac-m6h1wqx-shard-00-01.rdmew3v.mongodb.net:27017,ac-m6h1wqx-shard-00-02.rdmew3v.mongodb.net:27017/?ssl=true&replicaSet=atlas-ru88hx-shard-0&authSource=admin&retryWrites=true&w=majority`;
+
+// const options = {
+//   dbName: "redTomato",
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// };
+
+// mongoose
+//   .connect(uri, options)
+//   .then(() => console.log("Connected to DB"))
+//   .catch((err) => console.log("Couldnt Connect", err));
+
+// const mealSchema = new mongoose.Schema({
+//   mealId: Number,
+//   mealTitle: String,
+//   mealCatecory: String,
+//   mealThumb: String,
+//   mealTags: [String],
+//   mealPrice: Number,
+//   mealQuantity: Number,
+// });
+
+// const Meal = mongoose.model("Meal", mealSchema);
+
+/* const createMeal = async () => {
+  const meal = new Meal({
+    mealId: 9901,
+    mealTitle: "Thai Fried Rice",
+    mealCategory: "Rice and Noodles",
+    mealThumb: "i.ibb.co/zNDPYJ8/thai-fried-rice-1.jpg",
+    mealPrice: 150,
+    mealQuantity: null,
+  });
+
+  const result = await meal.save();
+  console.log(result);
+};
+
+createMeal(); */

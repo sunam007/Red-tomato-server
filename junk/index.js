@@ -83,6 +83,6 @@ const run = async () => {
 
 run().catch(console.dir);
 
-// root url
+// root
 app.get("/", (req, res) => res.send("RED TOMATO Server is Running !!!!"));
 app.listen(port, () => console.log("listening to port", port));
