@@ -2,9 +2,10 @@ const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 const home = require("./routes/home");
-const { connectToDatabase } = require("./mongo.config.js"); //mongodb config
-const Meal = require("./models/meal"); // mongoose schema
 const meals = require("./routes/meals");
+const mealsByCategory = require("./routes/mealsByCategory");
+const categories = require("./routes/categories");
+const orders = require("./routes/orders");
 
 const app = express();
 
@@ -15,19 +16,9 @@ app.use(express.json());
 //routers
 app.use("/", home);
 app.use("/api/meals/", meals);
-
-//db connection
-connectToDatabase();
-
-async function getMeals() {
-  const meals = await Meal.find().or([
-    { mealPrice: { $lte: 100 } },
-    { mealTitle: /.*ml.*/i },
-  ]);
-  console.log(`total ${meals.length} meals found: `, meals);
-}
-
-getMeals();
+app.use("/api/categories", categories);
+app.use("/api/filter/", mealsByCategory);
+app.use("/api/orders/", orders);
 
 const port = process.env.PORT || 5000;
-app.listen(port, () => console.log("Listening on", port));
+app.listen(port, () => console.log("Listening on port: ", port));
