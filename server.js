@@ -6,8 +6,10 @@ const meals = require("./routes/meals");
 const mealsByCategory = require("./routes/mealsByCategory");
 const categories = require("./routes/categories");
 const orders = require("./routes/orders");
+const { connectToDatabase } = require("./mongo.config");
 
 const app = express();
+connectToDatabase();
 
 // middle-wares
 app.use(cors());

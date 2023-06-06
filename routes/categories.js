@@ -1,10 +1,10 @@
 const express = require("express");
-const { connectToDatabase } = require("../mongo.config");
+// const { connectToDatabase } = require("../mongo.config");
 const Category = require("../models/course"); // mongoose schema
 
 const router = express.Router();
 
-connectToDatabase();
+// connectToDatabase();
 
 router.get("/", (req, res) => {
   const getCategories = async () => {

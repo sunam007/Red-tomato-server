@@ -1,9 +1,9 @@
 const Meal = require("../models/meal"); // mongoose schema
 const express = require("express");
-const { connectToDatabase } = require("../mongo.config");
+// const { connectToDatabase } = require("../mongo.config");
 const router = express.Router();
 
-connectToDatabase();
+// connectToDatabase();
 
 router.get("/", (req, res) => {
   const getMeals = async () => {

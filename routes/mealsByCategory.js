@@ -1,14 +1,12 @@
 const Meal = require("../models/meal"); // mongoose schema
 const express = require("express");
-const { connectToDatabase } = require("../mongo.config");
+// const { connectToDatabase } = require("../mongo.config");
 const router = express.Router();
 
-connectToDatabase();
+// connectToDatabase();
 
 router.get("/:category", (req, res) => {
   const category = req.params.category;
-
-  console.log(category);
 
   const getMealsByCategory = async () => {
     try {
