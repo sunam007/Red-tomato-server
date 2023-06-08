@@ -1,4 +1,4 @@
-const Meal = require("../models/meal"); // mongoose schema
+const Meal = require("../models/category.model"); // mongoose schema
 const express = require("express");
 // const { connectToDatabase } = require("../mongo.config");
 const router = express.Router();

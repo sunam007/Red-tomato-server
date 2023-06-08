@@ -1,4 +1,4 @@
-const Order = require("../models/order"); // mongoose schema
+const Order = require("../models/order.model"); // mongoose schema
 const express = require("express");
 // const { connectToDatabase } = require("../mongo.config");
 const router = express.Router();
@@ -38,28 +38,34 @@ router.get("/:email", (req, res) => {
 router.post("/", async (req, res) => {
   const payload = req.body;
 
+  console.log("payload from order.js", payload);
+
+  let error;
+
   try {
     const meal = await Order.findById(payload._id);
 
     if (meal) {
-      res.status(404).send("requested meal already exists");
+      res.status(400).send("requested meal already exists");
 
       return;
     } else {
       const postOrder = async () => {
         const order = new Order(payload);
 
-        const result = await order.save();
+        await order.save();
 
-        console.log(result);
+        // console.log(result);
 
-        res.status(200).send(result);
+        // res.status(200).send(result);
+        res.status(200);
       };
 
       postOrder();
     }
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    error = err;
+    console.errorrs("this err is from order.js", error);
   }
 });
 

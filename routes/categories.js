@@ -1,6 +1,6 @@
 const express = require("express");
 // const { connectToDatabase } = require("../mongo.config");
-const Category = require("../models/course"); // mongoose schema
+const Category = require("../models/category.model"); // mongoose schema
 
 const router = express.Router();
 
