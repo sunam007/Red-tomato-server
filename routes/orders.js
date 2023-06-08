@@ -38,34 +38,29 @@ router.get("/:email", (req, res) => {
 router.post("/", async (req, res) => {
   const payload = req.body;
 
-  console.log("payload from order.js", payload);
-
-  let error;
-
   try {
     const meal = await Order.findById(payload._id);
+    if (meal) return res.status(400).send("bad request");
 
-    if (meal) {
-      res.status(400).send("requested meal already exists");
+    const order = new Order(payload);
 
-      return;
-    } else {
-      const postOrder = async () => {
-        const order = new Order(payload);
+    const result = await order.save();
+    console.log(result);
 
-        await order.save();
-
-        // console.log(result);
-
-        // res.status(200).send(result);
-        res.status(200);
-      };
-
-      postOrder();
-    }
+    res.status(200).send(result);
   } catch (err) {
-    error = err;
-    console.errorrs("this err is from order.js", error);
+    for (const key in err.errors) {
+      if (err.errors.hasOwnProperty(key)) {
+        const error = err.errors[key];
+        console.log(`Field: ${key}`);
+        console.log(`Error Type: ${error.kind}`);
+        console.log(`Error Path: ${error.path}`);
+        console.log(`Error Value: ${error.value}`);
+        console.log("---");
+      }
+    }
+
+    res.sendStatus(500);
   }
 });
 
