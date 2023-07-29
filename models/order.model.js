@@ -35,8 +35,6 @@ const orderSchema = new Schema({
   },
   mealQuantity: {
     type: Number,
-    min: [1, "Order quantity must be at least 1"],
-    max: [2, "Maximum limit reached"],
     required: [true, "mealQuantity is required"],
   },
   customerName: {

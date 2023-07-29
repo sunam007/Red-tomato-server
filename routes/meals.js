@@ -5,17 +5,29 @@ const router = express.Router();
 
 // connectToDatabase();
 
-router.get("/", (req, res) => {
-  const getMeals = async () => {
-    try {
-      const result = await Meal.find();
-      res.status(200).send(result);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+router.get("/", async (req, res) => {
+  try {
+    const tag = req.query.mealTags;
 
-  getMeals();
+    if (tag === "popular") {
+      const popularMeals = await Meal.find({ mealTags: "popular" }).sort({
+        mealTitle: 1,
+      });
+      return res.status(200).json({
+        status: "success",
+        count: popularMeals.length,
+        data: popularMeals,
+      });
+    } else {
+      const allMeals = await Meal.find();
+      return res
+        .status(200)
+        .json({ status: "success", count: allMeals.length, data: allMeals });
+    }
+  } catch (error) {
+    console.log(error.message);
+    res.status(404).json({ status: "fail", message: error.message });
+  }
 });
 
 router.get("/:id", (req, res) => {

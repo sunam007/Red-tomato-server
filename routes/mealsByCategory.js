@@ -1,9 +1,6 @@
 const Meal = require("../models/meal.model"); // mongoose schema
 const express = require("express");
-// const { connectToDatabase } = require("../mongo.config");
 const router = express.Router();
-
-// connectToDatabase();
 
 router.get("/:category", (req, res) => {
   const category = req.params.category;
